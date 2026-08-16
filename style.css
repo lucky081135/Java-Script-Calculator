@@ -1,0 +1,178 @@
+/* RESET */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+
+/* PAGE */
+body {
+    background-color: #000;
+    font-family: Arial, sans-serif;
+}
+
+
+/* CALCULATOR */
+.calculator {
+    width: 100%;
+    max-width: 500px;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: 25px 20px 30px;
+
+    background-color: #1e1e2f;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/* DISPLAY */
+#display {
+    width: 100%;
+    height: 90px;
+
+    margin-bottom: 20px;
+    padding: 10px 20px;
+
+    border: none;
+    border-radius: 18px;
+
+    background-color: white;
+    color: #111;
+
+    font-size: 42px;
+    font-weight: bold;
+    text-align: right;
+
+    outline: none;
+
+    /* Allow long numbers to scroll horizontally */
+    overflow-x: auto;
+    white-space: nowrap;
+
+    touch-action: manipulation;
+}
+
+
+/* BUTTON GRID */
+.buttons {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+
+/* ALL BUTTONS */
+.buttons button {
+    width: 100%;
+    height: 75px;
+
+    border: none;
+    border-radius: 18px;
+
+    font-size: 25px;
+    font-weight: bold;
+
+    background-color: #eeeeee;
+    color: #222;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+
+/* BUTTON PRESS EFFECT */
+.buttons button:active {
+    transform: scale(0.95);
+}
+
+
+/* OPERATORS */
+.buttons .operator {
+    background-color: #4b2aad;
+    color: white;
+}
+
+
+/* EQUALS */
+#equals {
+    background-color: #16803c;
+    color: white;
+}
+
+
+/* CLEAR + BACKSPACE */
+#clear,
+#backspace {
+    background-color: #555;
+    color: white;
+}
+
+
+/* ZERO BUTTON */
+.zero {
+    grid-column: span 2;
+}
+
+
+/* SMALLER PHONES */
+@media (max-width: 480px) {
+
+    .calculator {
+        max-width: none;
+        min-height: 100dvh;
+
+        padding: 20px 15px 25px;
+    }
+
+    #display {
+        height: 85px;
+        font-size: 38px;
+    }
+
+    .buttons {
+        gap: 9px;
+    }
+
+    .buttons button {
+        height: 72px;
+        font-size: 24px;
+        border-radius: 17px;
+    }
+}
+
+
+/* VERY SMALL PHONES */
+@media (max-width: 360px) {
+
+    .calculator {
+        padding: 15px 10px 20px;
+    }
+
+    #display {
+        height: 78px;
+        font-size: 32px;
+    }
+
+    .buttons {
+        gap: 7px;
+    }
+
+    .buttons button {
+        height: 65px;
+        font-size: 21px;
+    }
+}
