@@ -1,88 +1,106 @@
-/* RESET */
+/* ============================= */
+/* GENERAL PAGE */
+/* ============================= */
+
 * {
     box-sizing: border-box;
 }
 
-html,
 body {
     margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-}
+    padding: 30px;
+    min-height: 150vh;
 
+    background-color: #1e1e2f;
 
-/* PAGE */
-body {
-    background-color: #000;
     font-family: Arial, sans-serif;
 }
 
 
+/* ============================= */
 /* CALCULATOR */
+/* ============================= */
+
 .calculator {
-    width: 100%;
-    max-width: 500px;
-    min-height: 100dvh;
-    margin: 0 auto;
-    padding: 25px 20px 30px;
+    width: 200%;
+    max-width: 700px;
+    margin: 25px auto;
+    padding: 25px;
 
     background-color: #1e1e2f;
+    border-radius: 25px;
+    
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 
+/* ============================= */
 /* DISPLAY */
+/* ============================= */
+
 #display {
     width: 100%;
-    height: 90px;
+    height: 150px;
 
     margin-bottom: 20px;
-    padding: 10px 20px;
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    font-size: 38px;
+    font-weight: 700;
+
+    text-align: right;
 
     border: none;
-    border-radius: 18px;
+    border-radius: 15px;
 
     background-color: white;
     color: #111;
 
-    font-size: 42px;
-    font-weight: bold;
-    text-align: right;
-
-    outline: none;
-
-    /* Allow long numbers to scroll horizontally */
     overflow-x: auto;
+    overflow-y: hidden;
+
     white-space: nowrap;
 
-    touch-action: manipulation;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+}
+
+#display::-webkit-scrollbar {
+    display: none;
 }
 
 
+/* ============================= */
 /* BUTTON GRID */
-.buttons {
-    width: 100%;
+/* ============================= */
 
+.buttons {
     display: grid;
+
     grid-template-columns: repeat(4, 1fr);
 
-    gap: 12px;
+    gap: 14px;
 }
 
 
-/* ALL BUTTONS */
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+
 .buttons button {
-    width: 100%;
-    height: 75px;
+    height: 100px;
 
     border: none;
-    border-radius: 18px;
+    border-radius: 120px;
 
-    font-size: 25px;
+    font-size: 32px;
     font-weight: bold;
 
     background-color: #eeeeee;
@@ -90,31 +108,38 @@ body {
 
     cursor: pointer;
 
-    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
-
-/* BUTTON PRESS EFFECT */
 .buttons button:active {
     transform: scale(0.95);
 }
 
 
+/* ============================= */
 /* OPERATORS */
+/* ============================= */
+
 .buttons .operator {
     background-color: #4b2aad;
     color: white;
 }
 
 
+/* ============================= */
 /* EQUALS */
+/* ============================= */
+
 #equals {
-    background-color: #16803c;
+    background-color: #black;
     color: white;
 }
 
 
+/* ============================= */
 /* CLEAR + BACKSPACE */
+/* ============================= */
+
 #clear,
 #backspace {
     background-color: #555;
@@ -122,57 +147,48 @@ body {
 }
 
 
-/* ZERO BUTTON */
+/* ============================= */
+/* ZERO */
+/* ============================= */
+
 .zero {
     grid-column: span 2;
 }
 
 
-/* SMALLER PHONES */
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
 @media (max-width: 480px) {
 
-    .calculator {
-        max-width: none;
-        min-height: 100dvh;
+    body {
+        padding: 10px;
+    }
 
-        padding: 20px 15px 25px;
+    .calculator {
+        width: 100%;
+        margin: 20px auto;
+        padding: 15px;
+
+        border-radius: 22px;
     }
 
     #display {
-        height: 85px;
-        font-size: 38px;
+        height: 100px;
+        font-size: 40px;
+
+        margin-bottom: 18px;
     }
 
     .buttons {
-        gap: 9px;
+        gap: 12px;
     }
 
     .buttons button {
-        height: 72px;
-        font-size: 24px;
-        border-radius: 17px;
-    }
-}
+        height: 80px;
+        font-size: 25px;
 
-
-/* VERY SMALL PHONES */
-@media (max-width: 360px) {
-
-    .calculator {
-        padding: 15px 10px 20px;
-    }
-
-    #display {
-        height: 78px;
-        font-size: 32px;
-    }
-
-    .buttons {
-        gap: 7px;
-    }
-
-    .buttons button {
-        height: 65px;
-        font-size: 21px;
+        border-radius: 18px;
     }
 }

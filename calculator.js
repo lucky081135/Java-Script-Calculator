@@ -1,6 +1,8 @@
 let display = document.getElementById("display");
+
 let buttons = document.querySelectorAll(".number");
 let operators = document.querySelectorAll(".operator");
+
 let equalsButton = document.getElementById("equals");
 let clearButton = document.getElementById("clear");
 let backspaceButton = document.getElementById("backspace");
@@ -8,40 +10,34 @@ let backspaceButton = document.getElementById("backspace");
 let expression = "";
 
 
-// FORMAT NUMBERS FOR THE DISPLAY
+// FORMAT NUMBERS
 function formatExpression(value) {
 
     return value.replace(/\d+(\.\d*)?/g, function(number) {
 
         let parts = number.split(".");
+
         let wholeNumber = parts[0];
         let decimalPart = parts[1];
 
-        // Add commas to whole numbers
         wholeNumber = wholeNumber.replace(
             /\B(?=(\d{3})+(?!\d))/g,
             ","
         );
 
-        // Keep decimal part
         if (decimalPart !== undefined) {
             return wholeNumber + "." + decimalPart;
         }
 
         return wholeNumber;
-
     });
-
 }
 
 
-// UPDATE THE DISPLAY
+// UPDATE DISPLAY
 function updateDisplay() {
 
     display.value = formatExpression(expression);
-
-    // Move display to the far right
-    display.scrollLeft = display.scrollWidth;
 
 }
 
@@ -54,34 +50,40 @@ buttons.forEach(function(button) {
         let number = button.textContent;
 
 
-        // DECIMAL BUTTON
+        // DECIMAL
         if (number === ".") {
 
-            // Get the current number
             let parts = expression.split(/[+\-−×÷]/);
+
             let currentNumber = parts[parts.length - 1];
 
-
-            // Don't allow two decimal points
             if (currentNumber.includes(".")) {
                 return;
             }
 
-
-            // If starting from zero
-            if (expression === "0") {
-
+            if (expression === "") {
                 expression = "0.";
-
                 updateDisplay();
-
                 return;
             }
 
+            if (
+                expression === "0" ||
+                expression.endsWith("+") ||
+                expression.endsWith("−") ||
+                expression.endsWith("×") ||
+                expression.endsWith("÷")
+            ) {
+
+                expression += "0.";
+
+                updateDisplay();
+                return;
+            }
         }
 
 
-        // Remove starting zero
+        // REMOVE STARTING ZERO
         if (expression === "0") {
 
             expression = number;
@@ -91,7 +93,6 @@ buttons.forEach(function(button) {
             expression += number;
 
         }
-
 
         updateDisplay();
 
@@ -115,7 +116,8 @@ operators.forEach(function(button) {
 
 
         // Don't allow two operators together
-        let lastCharacter = expression[expression.length - 1];
+        let lastCharacter =
+            expression[expression.length - 1];
 
         if ("+−×÷".includes(lastCharacter)) {
             return;
@@ -131,38 +133,36 @@ operators.forEach(function(button) {
 });
 
 
-// EQUALS BUTTON
+// EQUALS
 equalsButton.addEventListener("click", function() {
 
     if (expression === "") {
         return;
     }
 
-
     try {
 
-        // Convert calculator symbols
         let calculation = expression
             .replace(/×/g, "*")
             .replace(/÷/g, "/")
             .replace(/−/g, "-");
 
 
-        // Calculate the expression
-        let answer = Function("return " + calculation)();
+        let answer = Function(
+            "return " + calculation
+        )();
 
 
-        // Check for invalid answers
         if (!Number.isFinite(answer)) {
 
             display.value = "Error";
+
             expression = "";
 
             return;
         }
 
 
-        // Save answer
         expression = String(answer);
 
         updateDisplay();
@@ -171,6 +171,7 @@ equalsButton.addEventListener("click", function() {
     } catch (error) {
 
         display.value = "Error";
+
         expression = "";
 
     }
@@ -178,7 +179,7 @@ equalsButton.addEventListener("click", function() {
 });
 
 
-// CLEAR BUTTON
+// CLEAR
 clearButton.addEventListener("click", function() {
 
     expression = "";
@@ -188,11 +189,10 @@ clearButton.addEventListener("click", function() {
 });
 
 
-// BACKSPACE BUTTON
+// BACKSPACE
 backspaceButton.addEventListener("click", function() {
 
     expression = expression.slice(0, -1);
-
 
     if (expression === "") {
 
