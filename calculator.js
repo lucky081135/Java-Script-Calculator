@@ -6,6 +6,7 @@ let operators = document.querySelectorAll(".operator");
 let equalsButton = document.getElementById("equals");
 let clearButton = document.getElementById("clear");
 let backspaceButton = document.getElementById("backspace");
+let percentButton = document.getElementById("percent");
 
 let expression = "";
 
@@ -205,3 +206,105 @@ backspaceButton.addEventListener("click", function() {
     }
 
 });
+
+// PERCENT BUTTON
+// PERCENT BUTTON
+percentButton.addEventListener("click", function() {
+
+    if (expression === "") {
+        return;
+    }
+
+    let parts = expression.split(/[+−×÷]/);
+
+    let percent = Number(parts[parts.length - 1]);
+
+    // Only one number
+    if (parts.length === 1) {
+
+        expression = String(percent / 100);
+
+        updateDisplay();
+
+        return;
+    }
+
+    let firstNumber = Number(parts[parts.length - 2]);
+
+    let operator = expression[expression.length - parts[parts.length - 1].length - 1];
+
+    let answer;
+
+    // Multiplication and division use the percentage as a decimal
+    if (operator === "×") {
+
+        answer = percent / 100;
+
+    } else if (operator === "÷") {
+
+        answer = percent / 100;
+
+    // Addition and subtraction calculate a percentage of the first number
+    } else if (operator === "+" || operator === "−") {
+
+        answer = firstNumber * percent / 100;
+
+    }
+
+    // Replace the percentage number with the calculated value
+    expression = expression.slice(
+        0,
+        expression.lastIndexOf(parts[parts.length - 1])
+    );
+
+    expression += String(answer);
+
+    updateDisplay();
+
+});
+
+const modeButton = document.getElementById("modeButton");
+const modeMenu = document.getElementById("modeMenu");
+
+modeButton.addEventListener("click", function () {
+    modeMenu.classList.toggle("show");
+});
+
+const basicMode = document.getElementById("basicMode");
+const scientificMode = document.getElementById("scientificMode");
+const mathNotesMode = document.getElementById("mathNotesMode");
+
+basicMode.addEventListener("click", function () {
+
+    basicMode.classList.add("active");
+    scientificMode.classList.remove("active");
+    mathNotesMode.classList.remove("active");
+
+    basicCalculator.classList.remove("hide-basic");
+    scientificCalculator.classList.remove("show-scientific");
+	modeMenu.classList.remove("show");
+	
+});
+
+
+scientificMode.addEventListener("click", function () {
+
+    basicMode.classList.remove("active");
+    scientificMode.classList.add("active");
+    mathNotesMode.classList.remove("active");
+
+    basicCalculator.classList.add("hide-basic");
+    scientificCalculator.classList.add("show-scientific");
+	modeMenu.classList.remove("show");
+});
+
+mathNotesMode.addEventListener("click", function () {
+
+    basicMode.classList.remove("active");
+    scientificMode.classList.remove("active");
+    mathNotesMode.classList.add("active");
+
+});
+
+const basicCalculator = document.getElementById("basicCalculator");
+const scientificCalculator = document.getElementById("scientificCalculator");

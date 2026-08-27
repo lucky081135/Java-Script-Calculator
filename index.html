@@ -4,40 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Calculator</title>
-	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="calculator">
 
-   <input type="text" id="display" value="0" readonly>
+    <!-- CALCULATOR MODE BUTTON -->
+    <div class="mode-container">
 
-    <div class="buttons">
+        <button id="modeButton"><span class="mini-calculator">
+    <span class="mini-screen"></span>
+    <span class="mini-buttons">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+    </span>
+</span>
+	</button>
 
-        <button id="clear">C</button>
-        <button id="backspace">⌫</button>
-        <button class="operator" data-operation="divide">÷</button>
-        <button class="operator" data-operation="multiply">×</button>
+        <div id="modeMenu" class="mode-menu">
 
-        <button class="number">1</button>
-        <button class="number">2</button>
-        <button class="number">3</button>
-        <button class="operator" data-operation="subtract">−</button>
+            <button class="mode-option active" id="basicMode">
+    ✓ <span>Basic</span>
+		</button>
 
-        <button class="number">4</button>
-        <button class="number">5</button>
-        <button class="number">6</button>
-        <button class="operator" data-operation="add">+</button>
+		<button class="mode-option" id="scientificMode">
+    ƒ(x) <span>Scientific</span>
+		</button>
 
-        <button class="number">7</button>
-        <button class="number">8</button>
-        <button class="number">9</button>
-        <button id="equals">=</button>
+		<button class="mode-option" id="mathNotesMode">
+    ∿ <span>Math Notes</span>
+</button>
 
-        <button class="number zero">0</button>
-        <button class="number">.</button>
+        </div>
 
     </div>
+
+
+    <!-- DISPLAY -->
+    <input type="text" id="display" value="0" readonly>
+
+<!-- SCIENTIFIC CALCULATOR -->
+<!-- BASIC CALCULATOR BUTTONS -->
+<!-- BASIC CALCULATOR BUTTONS -->
+<div class="buttons" id="basicCalculator">
+
+    <button id="clear">C</button>
+    <button id="backspace">⌫</button>
+
+    <button class="operator" data-operation="divide">÷</button>
+    <button class="operator" data-operation="multiply">×</button>
+
+    <button id="percent">%</button>
+
+    <button class="number">1</button>
+    <button class="number">2</button>
+    <button class="number">3</button>
+
+    <button class="operator" data-operation="subtract">−</button>
+
+    <button class="number">4</button>
+    <button class="number">5</button>
+    <button class="number">6</button>
+
+    <button class="operator" data-operation="add">+</button>
+
+    <button class="number">7</button>
+    <button class="number">8</button>
+    <button class="number">9</button>
+
+    <button id="equals">=</button>
+
+    <button class="number zero">0</button>
+    <button class="number">.</button>
+
+</div>
+
+<!-- SCIENTIFIC CALCULATOR -->
+<div class="scientific-calculator" id="scientificCalculator">
+
+    <button class="scientific-function">sin</button>
+    <button class="scientific-function">cos</button>
+    <button class="scientific-function">tan</button>
+    <button class="scientific-function">log</button>
+
+    <button class="scientific-function">ln</button>
+    <button class="scientific-function">√</button>
+    <button class="scientific-function">x²</button>
+    <button class="scientific-function">xʸ</button>
+
+    <button class="scientific-function">π</button>
+    <button class="scientific-function">e</button>
+    <button class="scientific-function">(</button>
+    <button class="scientific-function">)</button>
+
+</div>
+
+</div>
+
 
 <script src="calculator.js"></script>
 
