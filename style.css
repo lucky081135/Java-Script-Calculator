@@ -132,7 +132,7 @@ body {
 
 #equals {
     background-color: #black;
-    color: white;
+    color: #111;
 }
 
 
@@ -186,7 +186,7 @@ body {
     }
 
     .buttons button {
-        height: 80px;
+        height: 75px;
         font-size: 25px;
 
         border-radius: 18px;
@@ -269,11 +269,11 @@ body {
 /* MINI CALCULATOR */
 .mini-calculator {
     width: 25px;
-    height: 40px;
+    height: 35px;
     background: #222;
-    border-radius: 5px;
+    border-radius: 4px;
     display: inline-block;
-    padding: 4px;
+    padding: 3px;
     box-sizing: border-box;
 }
 
@@ -293,8 +293,8 @@ body {
 }
 
 .mini-buttons i {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     background: #aaa;
     border-radius: 1px;
 }
@@ -306,10 +306,10 @@ body {
 }
 
 .scientific-function {
-    padding: 15px 5px;
+    padding: 11px 5px;
     border: none;
-    border-radius: 10px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-size: 18px;
     cursor: pointer;
 }
 
@@ -319,4 +319,55 @@ body {
 
 .buttons.hide-basic {
     display: none;
+}
+
+/* SCIENTIFIC MODE - BASIC KEYPAD */
+
+.scientific-calculator .scientific-number,
+.scientific-calculator .scientific-operator,
+.scientific-calculator .scientific-clear,
+.scientific-calculator .scientific-backspace,
+.scientific-calculator .scientific-equals,
+.scientific-calculator .scientific-percent {
+    height: 50px;
+
+    border: none;
+    border-radius: 30%;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.scientific-calculator .scientific-number {
+    background-color: #eeeeee;
+    color: #222;
+}
+
+.scientific-calculator .scientific-clear,
+.scientific-calculator .scientific-backspace {
+    background-color: #555;
+    color: white;
+}
+
+.scientific-calculator .scientific-operator {
+    background-color: #4b2aad;
+    color: white;
+}
+
+.scientific-calculator .scientific-equals {
+    background-color: #111;
+    color: white;
+}
+
+.scientific-calculator .scientific-percent {
+    background-color: #eeeeee;
+    color: #222;
+}
+
+.scientific-calculator button:active {
+    transform: scale(0.95);
 }
