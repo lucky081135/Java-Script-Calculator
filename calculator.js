@@ -308,3 +308,183 @@ mathNotesMode.addEventListener("click", function () {
 
 const basicCalculator = document.getElementById("basicCalculator");
 const scientificCalculator = document.getElementById("scientificCalculator");
+
+// SCIENTIFIC NUMBER BUTTONS
+
+let scientificNumbers = document.querySelectorAll(".scientific-number");
+
+scientificNumbers.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        let number = button.textContent;
+
+        // DECIMAL BUTTON
+        if (number === ".") {
+
+            let parts = expression.split(/[+\-−×÷]/);
+
+            let currentNumber = parts[parts.length - 1];
+
+            if (currentNumber.includes(".")) {
+                return;
+            }
+
+            if (
+                expression === "" ||
+                expression === "0" ||
+                expression.endsWith("+") ||
+                expression.endsWith("−") ||
+                expression.endsWith("×") ||
+                expression.endsWith("÷")
+            ) {
+
+                expression += "0.";
+
+                updateDisplay();
+                return;
+            }
+        }
+
+        // REMOVE STARTING ZERO
+        if (expression === "0") {
+
+            expression = number;
+
+        } else {
+
+            expression += number;
+
+        }
+
+        updateDisplay();
+
+    });
+
+});
+
+// SCIENTIFIC OPERATOR BUTTONS
+
+let scientificOperators = document.querySelectorAll(".scientific-operator");
+
+scientificOperators.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        let operator = button.textContent;
+
+        // Don't allow an operator first
+        if (expression === "") {
+            return;
+        }
+
+        // Don't allow two operators together
+        let lastCharacter = expression[expression.length - 1];
+
+        if ("+−×÷".includes(lastCharacter)) {
+            return;
+        }
+
+        expression += operator;
+
+        updateDisplay();
+
+    });
+
+});
+
+// SCIENTIFIC EQUALS BUTTON
+
+let scientificEquals = document.querySelector(".scientific-equals");
+
+scientificEquals.addEventListener("click", function() {
+
+    if (expression === "") {
+        return;
+    }
+
+    try {
+
+        let calculation = expression
+            .replace(/×/g, "*")
+            .replace(/÷/g, "/")
+            .replace(/−/g, "-");
+
+        let answer = Function(
+            "return " + calculation
+        )();
+
+        if (!Number.isFinite(answer)) {
+
+            display.value = "Error";
+            expression = "";
+
+            return;
+        }
+
+        expression = String(answer);
+
+        updateDisplay();
+
+    } catch (error) {
+
+        display.value = "Error";
+        expression = "";
+
+    }
+
+});
+
+// SCIENTIFIC CLEAR BUTTON
+
+let scientificClear = document.querySelector(".scientific-clear");
+
+scientificClear.addEventListener("click", function() {
+
+    expression = "";
+
+    display.value = "0";
+
+});
+
+// SCIENTIFIC BACKSPACE BUTTON
+
+let scientificBackspace = document.querySelector(".scientific-backspace");
+
+scientificBackspace.addEventListener("click", function() {
+
+    expression = expression.slice(0, -1);
+
+    if (expression === "") {
+        display.value = "0";
+    } else {
+        updateDisplay();
+    }
+
+});
+
+// SQUARE ROOT
+
+let squareRootButton = document.getElementById("squareRoot");
+
+squareRootButton.addEventListener("click", function() {
+
+    if (expression === "") {
+        return;
+    }
+
+    let number = Number(expression);
+
+    if (number < 0) {
+        display.value = "Error";
+        expression = "";
+        return;
+    }
+
+    let answer = Math.sqrt(number);
+
+    expression = String(answer);
+
+    updateDisplay();
+
+});
