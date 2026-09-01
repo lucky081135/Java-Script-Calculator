@@ -38,21 +38,16 @@ body {
 /* ============================= */
 /* DISPLAY */
 /* ============================= */
-
 #display {
     width: 100%;
-    height: 150px;
-
+    height: 100px;
     margin-bottom: 20px;
     padding: 15px;
 
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    box-sizing: border-box;
 
-    font-size: 38px;
-    font-weight: 700;
-
+    font-size: 32px;
+    font-weight: bold;
     text-align: right;
 
     border: none;
@@ -61,14 +56,16 @@ body {
     background-color: white;
     color: #111;
 
+    /* LONG EXPRESSIONS */
     overflow-x: auto;
     overflow-y: hidden;
-
     white-space: nowrap;
 
+    /* MOBILE SCROLLING */
     touch-action: pan-x;
     -webkit-overflow-scrolling: touch;
 
+    /* Hide scrollbar */
     scrollbar-width: none;
 }
 
@@ -216,11 +213,8 @@ body {
     cursor: pointer;
 }
 
-
 /* MODE MENU */
 .mode-menu {
-    display: none;
-
     position: absolute;
     top: 65px;
     right: 0;
@@ -234,19 +228,33 @@ body {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 
     z-index: 1000;
+
+    /* Hidden state */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.97);
+
+    /* Smooth animation */
+    transition:
+        opacity 0.20s ease,
+        transform 0.20s ease,
+        visibility 0.20s ease;
 }
 
 
-/* SHOW MENU */
+/* OPEN MENU */
+
 .mode-menu.show {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
 }
 
+/* MODE OPTIONS */
 
-/* MENU OPTIONS */
 .mode-option {
     width: 100%;
-    padding: 15px;
+    padding: 14px 15px;
 
     border: none;
     background: transparent;
@@ -257,8 +265,26 @@ body {
 
     border-radius: 10px;
     cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease;
 }
 
+.mode-option:hover {
+    background-color: #333;
+}
+
+.mode-option:active {
+    transform: scale(0.97);
+}
+
+
+/* SELECTED MODE */
+
+.mode-option.active {
+    background-color: #333;
+}
 
 /* SELECTED MODE */
 .mode-option.active {
@@ -268,7 +294,7 @@ body {
 
 /* MINI CALCULATOR */
 .mini-calculator {
-    width: 25px;
+   width: 25px;
     height: 35px;
     background: #222;
     border-radius: 4px;
@@ -299,11 +325,22 @@ body {
     border-radius: 1px;
 }
 
+/* SCIENTIFIC CALCULATOR */
+
 .scientific-calculator {
     display: none;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
 }
+
+
+/* SCIENTIFIC FUNCTIONS */
 
 .scientific-function {
     padding: 11px 5px;
@@ -313,9 +350,17 @@ body {
     cursor: pointer;
 }
 
+
+/* SCIENTIFIC CALCULATOR WHEN OPEN */
+
 .scientific-calculator.show-scientific {
     display: grid;
+    opacity: 1;
+    transform: translateY(0);
 }
+
+
+/* BASIC CALCULATOR WHEN HIDDEN */
 
 .buttons.hide-basic {
     display: none;
@@ -370,4 +415,25 @@ body {
 
 .scientific-calculator button:active {
     transform: scale(0.95);
+}
+
+/* CALCULATOR MODE TRANSITION */
+
+#basicCalculator {
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+#scientificCalculator {
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* BASIC HIDDEN */
+
+.buttons.hide-basic {
+    display: none;
 }

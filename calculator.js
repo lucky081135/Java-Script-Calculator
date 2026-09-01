@@ -40,7 +40,35 @@ function updateDisplay() {
 
     display.value = formatExpression(expression);
 
+    // Wait until the display has updated
+    // before moving to the newest part
+    requestAnimationFrame(function() {
+        display.scrollLeft = display.scrollWidth;
+    });
+
 }
+
+// DISPLAY HORIZONTAL SWIPE
+
+let startX = 0;
+let startScrollLeft = 0;
+
+display.addEventListener("touchstart", function(event) {
+
+    startX = event.touches[0].clientX;
+    startScrollLeft = display.scrollLeft;
+
+}, { passive: true });
+
+
+display.addEventListener("touchmove", function(event) {
+
+    let currentX = event.touches[0].clientX;
+    let distance = currentX - startX;
+
+    display.scrollLeft = startScrollLeft - distance;
+
+}, { passive: true });
 
 
 // NUMBER BUTTONS
@@ -482,6 +510,26 @@ squareRootButton.addEventListener("click", function() {
     }
 
     let answer = Math.sqrt(number);
+
+    expression = String(answer);
+
+    updateDisplay();
+
+});
+
+// SQUARE
+
+let squareButton = document.getElementById("square");
+
+squareButton.addEventListener("click", function() {
+
+    if (expression === "") {
+        return;
+    }
+
+    let number = Number(expression);
+
+    let answer = number ** 2;
 
     expression = String(answer);
 
